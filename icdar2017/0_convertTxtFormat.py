@@ -4,14 +4,16 @@
 '''
 python convertTxtFormat.py [file path, eg: train]
 '''
-import os
+import os, sys
 
 def test(argv):
     if not os.path.exists('temp'):
         os.makedirs('temp')
 
+    sumary = len(os.listdir(argv[1])) 
+    i = 0
     for each in os.listdir(argv[1]):
-        print each
+        #print each
         if not each.endswith('.txt'):
             continue
         contents = []
@@ -23,7 +25,13 @@ def test(argv):
         with open('temp/{}'.format(each), 'w') as fid:
             for c in contents:
                 fid.write("{}\n".format(c))
-        print "saving {}".format(each)
+        #print "saving {}".format(each)
+
+        #print "{}/{}".format(i, sumary)
+        sys.stdout.flush()
+        sys.stdout.write('{}/{}\r'.format(i, sumary))
+        i += 1
+    print '\nFinish!'
 
 def main():
     import sys

@@ -51,7 +51,7 @@ Object = """
 
 def getImageSize(imgPath, imgName):
     filename = os.path.join(imgPath, "{}.jpg".format(imgName))
-    print filename
+    #print filename
     return Image.open(filename).size
 
 def convert(filepath):
@@ -66,6 +66,7 @@ def convert(filepath):
     global Object
     files = sorted([x for x in os.listdir(filepath) if not x.startswith('.') and x.endswith('.txt')])
 
+    i = 0
     for txt in files: # image_0.txt
         imgname = '{:0>6}'.format(txt[6:-4])
         width, height = getImageSize(osp.join(root, 'JPEGImages'), imgname)
@@ -90,6 +91,9 @@ def convert(filepath):
                 xmax = max(x1,x2,x3,x4)
                 ymax = max(y1,y2,y3,y4)
 
+                assert xmin <= xmax
+                assert ymin <= ymax
+
                 newObj = copy.deepcopy(Object).format(name, xmin, ymin, xmax, ymax)
                 #newObj = Object.format(name, x1, y1, x2, y2)
                 objs += newObj
@@ -97,7 +101,12 @@ def convert(filepath):
 
         with open('Annotations/{}.xml'.format(imgname), 'w') as fid:
             fid.write(newAnno)
-        print "write to Annotations/{}".format(imgname)
+        #print "write to Annotations/{}".format(imgname)
+
+        sys.stdout.flush()
+        sys.stdout.write('{}/{}\r'.format(i, len(files)))
+        i += 1
+    print '\nFinish!'
 
 def main():
     if len(sys.argv) != 2:
