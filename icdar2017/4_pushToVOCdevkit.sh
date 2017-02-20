@@ -20,10 +20,13 @@ if [ ! -d ImageSets ];then
     exit 1
 fi
 
-mkdir -p $1/$2 
+if [ ! -d $1/$2 ];then
+    mkdir -p $1/$2
+fi
+rm $1/$2/* -r
+
 mv Annotations $1/$2/
 mv JPEGImages $1/$2/
 mv ImageSets $1/$2/
-rm temp
 
 echo "Creating $1/$2"

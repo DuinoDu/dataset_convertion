@@ -86,10 +86,15 @@ def convert(filepath):
                 x4 = eval(box[6])
                 y4 = eval(box[7])
                 
-                xmin = min(x1,x2,x3,x4)
-                ymin = min(y1,y2,y3,y4)
-                xmax = max(x1,x2,x3,x4)
-                ymax = max(y1,y2,y3,y4)
+                xmin = min(x1,x2,x3,x4) + 1
+                ymin = min(y1,y2,y3,y4) + 1
+                xmax = max(x1,x2,x3,x4) + 1
+                ymax = max(y1,y2,y3,y4) + 1
+
+                xmin = max(xmin, 1)
+                ymin = max(ymin, 1)
+                xmax = min(xmax, width)
+                ymax = min(ymax, height)
 
                 assert xmin <= xmax
                 assert ymin <= ymax

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-python createJPEGImages.py [file path containing jpg] [img_ext, eg:jpg]
+python createJPEGImages.py [absolute file path containing jpg] [img_ext, eg:jpg]
 '''
 import os,sys,commands
 
