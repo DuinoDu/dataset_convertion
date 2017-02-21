@@ -22,7 +22,6 @@ def createJPEGImages(argv):
     for f in files:
         index = f[6:-4] # image_0.jpg
         cmd = 'ln -s {}{} {:0>6}.jpg'.format(root, f, index)
-        #print cmd
         (status, output) = commands.getstatusoutput(cmd)
         if status != 0:
             print "Error when run \"ln\""
