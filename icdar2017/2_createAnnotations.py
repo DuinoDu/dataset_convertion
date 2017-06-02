@@ -10,7 +10,7 @@ import sys
 import os
 import os.path as osp
 import copy
-import Image
+import PIL.Image as Image
 
 Annnotation = """<annotation>
 	<folder>icdar2017</folder>
